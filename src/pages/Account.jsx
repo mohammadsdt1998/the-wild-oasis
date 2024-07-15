@@ -1,9 +1,10 @@
+import React from "react";
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
 
 function Account() {
   return (
-    <>
+    <React.Fragment>
       <Heading as="h1">Update your account</Heading>
 
       <Row>
@@ -15,7 +16,7 @@ function Account() {
         <Heading as="h3">Update password</Heading>
         <p>Update user password form</p>
       </Row>
-    </>
+    </React.Fragment>
   );
 }
 
