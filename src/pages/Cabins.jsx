@@ -1,13 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
-import { getCabins } from "../services/apiCabins";
 import CabinTable from "../features/cabins/CabinTable";
 
 function Cabins() {
-  useEffect(function () {
-    getCabins().then((data) => console.log(data));
-  }, []);
   return (
     <React.Fragment>
       <Row type="horizontal">
