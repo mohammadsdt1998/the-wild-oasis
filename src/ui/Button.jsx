@@ -1,3 +1,4 @@
+import emotionIsPropValid from "@emotion/is-prop-valid";
 import styled, { css } from "styled-components";
 
 const sizes = {
@@ -48,7 +49,10 @@ const variations = {
   `,
 };
 
-const Button = styled.button`
+const Button = styled.button.withConfig({
+  shouldForwardProp: (prop) =>
+    emotionIsPropValid(prop) && prop !== "variation" && prop !== "size",
+})`
   border: none;
   border-radius: var(--border-radius-sm);
   box-shadow: var(--shadow-sm);
