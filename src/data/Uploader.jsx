@@ -4,7 +4,7 @@ import supabase from "../services/supabase";
 import Button from "../ui/Button";
 import { subtractDates } from "../utils/helpers";
 
-import { bookings } from "./data-bookings";
+import { bookings } from "./data-bookings.js";
 import { cabins } from "./data-cabins";
 import { guests } from "./data-guests";
 
@@ -42,10 +42,14 @@ async function createCabins() {
 
 async function createBookings() {
   // Bookings need a guestId and a cabinId. We can't tell Supabase IDs for each object, it will calculate them on its own. So it might be different for different people, especially after multiple uploads. Therefore, we need to first get all guestIds and cabinIds, and then replace the original IDs in the booking data with the actual ones from the DB
-  const { data: guestsIds } = await supabase
+  const { data: guestsIds, error: guestError } = await supabase
     .from("guests")
     .select("id")
     .order("id");
+  if (guestError) {
+    console.log(guestError);
+    return;
+  }
   const allGuestIds = guestsIds.map((cabin) => cabin.id);
   const { data: cabinsIds } = await supabase
     .from("cabins")
