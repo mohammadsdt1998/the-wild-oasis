@@ -17,17 +17,21 @@ export function useBookings() {
 
   const sortByRaw = searchParams.get("sortBy") || "startDate-desc";
 
+  // PAGINATION
+
+  const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
+
   const [field, direction] = sortByRaw.split("-");
   const sortBy = { field, direction };
 
   const {
     isLoading,
-    data: bookings,
+    data: { data: bookings, count } = {},
     error,
   } = useQuery({
-    queryKey: ["bookigns", filter, sortBy],
-    queryFn: () => getBookings({ filter, sortBy }),
+    queryKey: ["bookigns", filter, sortBy, page],
+    queryFn: () => getBookings({ filter, sortBy, page }),
   });
 
-  return { isLoading, bookings, error };
+  return { isLoading, error, bookings, count };
 }
