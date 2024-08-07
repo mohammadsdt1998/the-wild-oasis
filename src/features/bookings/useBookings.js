@@ -33,7 +33,7 @@ export function useBookings() {
     data: { data: bookings, count } = {},
     error,
   } = useQuery({
-    queryKey: ["bookigns", filter, sortBy, page],
+    queryKey: ["bookings", filter, sortBy, page],
     queryFn: () => getBookings({ filter, sortBy, page }),
     keepPreviousData: true,
   });
